@@ -8,7 +8,7 @@ const descriptionForm = document.querySelector('.description-form');
 const tasksArrays = {  todo : [],doing : [],review : [],done : [] }
 let currArray = tasksArrays.todo;
 // blue #6A6DCD  purple #C340A1 red #D93535
-taskColors = ['#D93535', '#C340A1','#6A6DCD' ];
+taskColors = ['red', 'orange','green' ];
 let selectedTaskElement = null;
 
 
@@ -67,8 +67,9 @@ function showDescriptionForm(e){
 
 function createTask(e) {
         e.preventDefault();
-        const task = {id:Date.now()+Math.trunc(Math.random()*100000),title:modalElement.querySelector(".title").value,deadline:new Date(modalElement.querySelector(".deadline").value),priority:modalElement.querySelector(".priority").value, description:"aaa"}
-        if(task.title.length <3 || Date.now() > task.deadline || !isFinite(task.deadline.getTime())) {
+        const task = {id:Date.now()+Math.trunc(Math.random()*100000),title:modalElement.querySelector(".title").value,deadline:new Date(modalElement.querySelector(".deadline").value),priority:modalElement.querySelector(".priority").value, description:""}
+        const tenYearsFromNow = Date.now() + 10 * 365 * 24 * 60 * 60 * 1000;
+        if(task.title.length <3 || Date.now() > task.deadline ||  task.deadline.getTime() > tenYearsFromNow|| !isFinite(task.deadline.getTime())) {
             alert("enter correct data");
             return
         }   
