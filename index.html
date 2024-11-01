@@ -14,9 +14,13 @@
         </h1>
         
         <div class="cnt min-w-[400px]  w-[96%] lg:w-[1024px]    mx-auto mt-10 mb-28  overflow-x-auto p-3">
-            
             <div class="content flex items-start  gap-3 ">
-               <div class="list-container mx-auto basis-72 min-w-60 bg-[#262626] rounded flex flex-col gap-5 p-3">
+               <div class="relative transition-all list-container mx-auto basis-72 min-w-60 bg-[#262626] rounded flex flex-col gap-5 p-3">
+                <div class="flex flex-col absolute right-0 top-0 text-white text-sm gap-1 p-1">
+                    
+                    <button class="btn-sortpr bg-orange-600/5 px-2 rounded hover:bg-orange-500 transition-all">priority</button>
+                    <button class="btn-sortdl bg-red-600/5 px-2 rounded hover:bg-red-500 transition-all">deadline</button>
+                </div>
                 <h2 class="  list-title text-white pl-3 font-semibold tracking-wider text-lg">To do</h2>
                 <ul class="  list     flex flex-col  gap-5 " id="todo">
                     <!-- <li class=" transition-all task bg-[#D9D9D9] rounded overflow-hidden" draggable="true">
@@ -73,7 +77,12 @@
                 </ul>
                 <button data-name="todo" class="btn-addtask transition-all  bg-[#353535] rounded flex justify-center items-center  text-3xl text-white" draggable="true">+</button>
                </div>
-               <div class="list-container mx-auto basis-72 min-w-60 bg-[#262626] rounded flex flex-col gap-5 p-3">
+               <div class="relative transition-all list-container mx-auto basis-72 min-w-60 bg-[#262626] rounded flex flex-col gap-5 p-3">
+                <div class="flex flex-col absolute right-0 top-0 text-white text-sm gap-1 p-1">
+                    
+                    <button class="btn-sortpr bg-orange-600/5 px-2 rounded hover:bg-orange-500 transition-all">priority</button>
+                    <button class="btn-sortdl bg-red-600/5 px-2 rounded hover:bg-red-500 transition-all">deadline</button>
+                </div>
                 <h2 class="  list-title text-white pl-3 font-semibold tracking-wider text-lg">doing</h2>
                 <ul class="  list     flex flex-col  gap-5 " id="doing">
                     <!-- <li class=" transition-all task bg-[#D9D9D9] rounded overflow-hidden" draggable="true">
@@ -130,7 +139,12 @@
                 </ul>
                 <button data-name="doing" class="btn-addtask transition-all  bg-[#353535] rounded flex justify-center items-center  text-3xl text-white" draggable="true">+</button>
                </div>
-               <div class="list-container mx-auto basis-72 min-w-60 bg-[#262626] rounded flex flex-col gap-5 p-3">
+               <div class="relative transition-all list-container mx-auto basis-72 min-w-60 bg-[#262626] rounded flex flex-col gap-5 p-3">
+                <div class="flex flex-col absolute right-0 top-0 text-white text-sm gap-1 p-1">
+                    
+                    <button class="btn-sortpr bg-orange-600/5 px-2 rounded hover:bg-orange-500 transition-all">priority</button>
+                    <button class="btn-sortdl bg-red-600/5 px-2 rounded hover:bg-red-500 transition-all">deadline</button>
+                </div>
                 <h2 class="  list-title text-white pl-3 font-semibold tracking-wider text-lg">Review</h2>
                 <ul class="  list     flex flex-col  gap-5 " id="review">
                     <!-- <li class=" transition-all task bg-[#D9D9D9] rounded overflow-hidden" draggable="true">
@@ -187,7 +201,12 @@
                 </ul>
                 <button data-name="review" class="btn-addtask transition-all  bg-[#353535] rounded flex justify-center items-center  text-3xl text-white" draggable="true">+</button>
                </div>
-               <div class="list-container mx-auto basis-72 min-w-60 bg-[#262626] rounded flex flex-col gap-5 p-3">
+               <div class="relative transition-all list-container mx-auto basis-72 min-w-60 bg-[#262626] rounded flex flex-col gap-5 p-3">
+                <div class="flex flex-col absolute right-0 top-0 text-white text-sm gap-1 p-1">
+                    
+                    <button class="btn-sortpr bg-orange-600/5 px-2 rounded hover:bg-orange-500 transition-all">priority</button>
+                    <button class="btn-sortdl bg-red-600/5 px-2 rounded hover:bg-red-500 transition-all">deadline</button>
+                </div>
                 <h2 class="  list-title text-white pl-3 font-semibold tracking-wider text-lg">Done</h2>
                 <ul class="  list     flex flex-col  gap-5 " id="done">
                     <!-- <li class=" transition-all task bg-[#D9D9D9] rounded overflow-hidden" draggable="true">
@@ -261,16 +280,21 @@
             <div class=" flex justify-between">
                 <label for="select" class=" text-white">Select Priority :</label>
                 <select  class="priority">
-                    <option value="1">p1</option>
-                    <option value="2">p2</option>
-                    <option value="3">p3</option>
+                    <option value="0">p1</option>
+                    <option value="1">p2</option>
+                    <option value="2">p3</option>
                 </select>
             </div>
             <button class="form-btn cursor-pointer py-1 px-2 bg-slate-500 rounded-md">Add Task</button>
         </form>
+        <form class=" description-form absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] z-2 min-w-28 min-h-28 rounded-md hidden flex-col items-center px-10 py-4 gap-5 bg-[#242424] shadow-sm shadow-[#535353] ">
+            <label class="text-white">Description :</label>
+            <textarea  class="w-[100%] max-w-[100%] max-h-14 min-h-8 bg-slate-300"></textarea>
+            <button class="bg-slate-300 px-4 px-1 text-slate-950">save</button>
+        </form>
     </main>  
       
 </body>
-<!-- <script src="drag&drop.js"></script> -->
+
 <script src="display.js"></script>
 </html>

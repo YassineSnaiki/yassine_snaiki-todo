@@ -30,4 +30,10 @@
     transform:rotateX(180deg);
 }
 
+.bottom-element {
+    box-shadow: 0 -4px 0 0 cyan; /* Only adds a "border" to the top */
+}
 
+.hoveredzone {
+    background-color: #595959 !important;
+}
