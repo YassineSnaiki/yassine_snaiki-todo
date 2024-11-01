@@ -9,6 +9,7 @@ const tasksArrays = {  todo : [],doing : [],review : [],done : [] }
 let currArray = tasksArrays.todo;
 // blue #6A6DCD  purple #C340A1 red #D93535
 taskColors = ['#D93535', '#C340A1','#6A6DCD' ];
+let selectedTaskElement = null;
 
 
 
@@ -17,8 +18,19 @@ document.addEventListener('click',e=>{
     hideDescription(e);
     showModal(e)
 })
-document.addEventListener('click',showModal)
-modalElement.addEventListener('submit',createTask)
+document.addEventListener('click',showModal);
+modalElement.addEventListener('submit',createTask);
+descriptionForm.addEventListener('submit',modifyDescription);
+
+
+function modifyDescription(e) {
+    e.preventDefault();
+    selectedTaskElement.description = descriptionForm.querySelector("textarea").value.trim();
+    descriptionForm.classList.add('hidden');
+    descriptionForm.classList.remove('flex');
+};
+
+
 
 
 function hideModal(e){
@@ -74,7 +86,7 @@ function displayTasks(tasksArrays,listElements){
     for(const [key,val] of Object.entries(tasksArrays)) {
         const list = [...listElements].find(list=>list.closest(`#${key}`));
         val.forEach(el => {           
-           const li = createTaskElement(el);       
+           const li =createTaskElement(el);       
            list.append(li);
            li.addEventListener('dragstart',e=>{
             e.target.classList.add('is-dragged');
@@ -85,31 +97,58 @@ function displayTasks(tasksArrays,listElements){
             e.target.style.opacity = '1';
         })      
         li.addEventListener('click', e=>{
-            showDescriptionForm(e);
-            console.log(el);          
-            descriptionForm.querySelector("textarea").value = el.description;
             hideModal(e);
-        })    
+            showDescriptionForm(e);        
+            selectedTaskElement = getTaskObject(+li.dataset.id);
+            descriptionForm.querySelector("textarea").value = selectedTaskElement.description;          
+        }) 
+        li.querySelector('.btn-deletetask').addEventListener('click',e=>{
+            e.stopPropagation();
+            const id = +li.dataset.id;
+            for (const arr of Object.values(tasksArrays)) {
+                const taskIndex = arr.findIndex(el => el?.id === id);
+                if (taskIndex !== -1) {
+                    arr.splice(taskIndex, 1);
+                    break;
+                }
+            }
+            displayTasks(tasksArrays, listElements);
+        })   
+        li.querySelector('.btn-edittask').addEventListener('click',e=>{
+            e.stopPropagation();
+            li.querySelector('.edittask-list').classList.remove('hidden');
+            li.querySelector('.edittask-list').classList.add('flex');
+        })
+        document.addEventListener('click',e=>{
+            li.querySelector('.edittask-list').classList.add('hidden');
+            li.querySelector('.edittask-list').classList.remove('flex');
+        })
         });
     }
-
 }
 
 
 
 function createTaskElement(el) {
-    li = document.createElement('li');
-            li.setAttribute('class','transition-all task bg-[#D9D9D9] rounded overflow-hidden');
+    const li = document.createElement('li');
+            li.setAttribute('class','transition-all task bg-[#D9D9D9] rounded overflow-hidden relative');
             li.setAttribute('draggable','true');
             li.dataset.id = el.id;
             li.innerHTML = `<span style="background-color: ${taskColors[el.priority]};" class="task-header flex justify-end h-3">
-                                <span class=" flex gap-[2px] items-center px-1 cursor-pointer">
+                                <button class="transition-all btn-edittask flex gap-[2px] items-center px-1 cursor-pointer hover:bg-emerald-950">
                                     <span class=" h-1 w-1 bg-[#D9D9D9] rounded-full"></span>
                                     <span class=" h-1 w-1 bg-[#D9D9D9] rounded-full"></span>
                                     <span class=" h-1 w-1 bg-[#D9D9D9] rounded-full"></span>                   
-                                </span>
+                                </button>
+                                <ul class = "edittask-list hidden absolute right-1 top-4 bg-zinc-700 px-2 py-[1px] gap-4 rounded">
+                                   <button class="btn-deletetask  text-white hover:text-red-600 text-sm">    
+                                   <i class="transition-all fa-solid fa-trash "></i>
+                                   </button>
+                                </ul>
                             </span>
-                            <p class="task-text py-2 px-4">${el.title}</p>`
+                            <p class="py-1 px-2">${el.title}</p>
+                            <p class="px-1 text-[10px] text-red-950">${el.deadline.toLocaleDateString()}</p>
+                            `
     return li;
 }
 
@@ -238,5 +277,6 @@ function getTaskObject(id) {
         }
     }
 }
+
 
 
