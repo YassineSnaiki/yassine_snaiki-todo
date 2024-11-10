@@ -5,7 +5,21 @@ const draggables = document.querySelectorAll('.task');
 const zones = document.querySelectorAll('.list-container');
 const descriptionForm = document.querySelector('.description-form');
 
-const tasksArrays = {  todo : [],doing : [],review : [],done : [] }
+const tasksArrays = {
+    todo: [
+        { id: 1, title: 'Task 1', deadline: new Date('2024-12-10'), priority: 0, description: 'Description for Task 1' },
+        { id: 2, title: 'Task 2', deadline: new Date('2024-11-15'), priority: 1, description: 'Description for Task 2' }
+    ],
+    doing: [
+        { id: 3, title: 'Task 3', deadline: new Date('2024-11-20'), priority: 2, description: 'Description for Task 3' }
+    ],
+    review: [
+        { id: 4, title: 'Task 4', deadline: new Date('2024-11-25'), priority: 1, description: 'Description for Task 4' }
+    ],
+    done: [
+        { id: 5, title: 'Task 5', deadline: new Date('2024-10-30'), priority: 0, description: 'Description for Task 5' }
+    ]
+}
 let currArray = tasksArrays.todo;
 // blue #6A6DCD  purple #C340A1 red #D93535
 taskColors = ['red', 'orange','green' ];
@@ -68,8 +82,7 @@ function showDescriptionForm(e){
 function createTask(e) {
         e.preventDefault();
         const task = {id:Date.now()+Math.trunc(Math.random()*100000),title:modalElement.querySelector(".title").value,deadline:new Date(modalElement.querySelector(".deadline").value),priority:modalElement.querySelector(".priority").value, description:""}
-        const tenYearsFromNow = Date.now() + 10 * 365 * 24 * 60 * 60 * 1000;
-        if(task.title.length <3 || Date.now() > task.deadline ||  task.deadline.getTime() > tenYearsFromNow|| !isFinite(task.deadline.getTime())) {
+        if(task.title.length <1 || !isFinite(task.deadline.getTime())) {
             alert("enter correct data");
             return
         }   
@@ -281,3 +294,4 @@ function getTaskObject(id) {
 
 
 
+displayTasks(tasksArrays,listElements)
